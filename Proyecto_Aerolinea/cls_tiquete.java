@@ -17,6 +17,7 @@ public class cls_tiquete {
         this.cantidadInt = cantidad;
         this.tipo_claseStr=tipo;
         this.DescuentoFlt=descuento;
+        this.ivaFlt = 0.19f;
 
         pasajero = cliente;
 
@@ -27,7 +28,7 @@ public class cls_tiquete {
         }else if(this.tipo_claseStr.equals("3")){
             this.subtotalFlt = 900000f;
         }
-        this.totalFlt = (this.subtotalFlt*this.cantidadInt) - ((this.subtotalFlt*cantidadInt)*this.DescuentoFlt);
+        this.totalFlt = (this.subtotalFlt + (subtotalFlt*ivaFlt) - (this.DescuentoFlt*subtotalFlt))*this.cantidadInt;
     }
 
     

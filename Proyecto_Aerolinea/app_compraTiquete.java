@@ -29,14 +29,20 @@ public class app_compraTiquete {
                     "2. Plata\n" +
                     "3. Oro\n" +
                     "4. Platino");
-                pasajeros [posCliente] = new cls_pasajero(id, nombre, contacto, correo, sexo, memebrecia);
-                posCliente++;
+                
+                if(id.equals("")||nombre.equals("")||contacto.equals("")||correo.equals("")||sexo.equals("")||memebrecia.equals("")){
+                    JOptionPane.showMessageDialog(null, "Por favor ingrese los datos neccesarios");
+                }else{
+                    pasajeros [posCliente] = new cls_pasajero(id, nombre, contacto, correo, sexo, memebrecia);
+                    posCliente++;
+                }
+                
             }
             if(Opciones1.equals("2")){
                 String idConsulta = JOptionPane.showInputDialog(null, "Ingrese el id del cliente: ");
                 boolean sw = false;
                 int pos = 0;
-                for(int i = 0; i < pasajeros.length; i++){
+                for(int i = 0; i < posCliente; i++){
                     if(pasajeros[i].getIdStr().equals(idConsulta)){
                         sw = true;
                         pos = i;
@@ -53,7 +59,7 @@ public class app_compraTiquete {
                     "1. Efectivo\n" +
                     "2. Targeta de credito\n" +
                     "3. Targeta debito\n" +
-                    "3. Transferencia");
+                    "4. Transferencia");
                     int cantidad = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese la cantidad de tiquetes: "));
                     float descuentotipoPago = 0;
 
@@ -69,8 +75,12 @@ public class app_compraTiquete {
                     float descuento = pasajeros[pos].getDescuento() + descuentotipoPago;
                     cls_pasajero pasajeroTic = pasajeros [pos];
 
-                    tiquete [posTiquete] = new cls_tiquete(id, cantidad, tipo, descuento, pasajeroTic);
-                    posTiquete++;
+                    if(id.equals("")||tipo.equals("")||metodo_pago.equals("")||cantidad == 0||descuentotipoPago == 0){  
+                        JOptionPane.showMessageDialog(null, "Ingrese los datos necesarios");
+                    }else{
+                        tiquete [posTiquete] = new cls_tiquete(id, cantidad, tipo, descuento, pasajeroTic);
+                        posTiquete++;
+                    }
                 }else{
                     JOptionPane.showMessageDialog(null, "No se encontro el cliente");
                 }
@@ -90,8 +100,10 @@ public class app_compraTiquete {
                     JOptionPane.showMessageDialog(null, "Cliente: " + tiquete[pos].getPasajero().getNombreStr() +
                     "\nID Tiquete: " + tiquete[pos].getIdStr() +
                     "\nPrecio Tiquete unitario: " + tiquete[pos].getSubtotalFlt() +
+                    "\nCantidad: " + tiquete[pos].getCantidadInt() +
                     "\nDescuento: " + tiquete[pos].getDescuentoFlt() +
                     "\nTotal a pagar: " + tiquete[pos].getTotalFlt());
+
                 } else {
                     JOptionPane.showMessageDialog(null, "El ticket no existe");
                 }
